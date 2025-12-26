@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// Симуляция операторов
 const operators = [
   { id: 'operator1', name: 'Оператор 1', status: 'ожидает', callsHandled: 5 },
   { id: 'operator2', name: 'Оператор 2', status: 'занят', callsHandled: 3 },
@@ -40,9 +39,9 @@ const AdminDashboard = ({ user, onLogout, theme, toggleTheme }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6 text-gray-800 dark:text-white">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
       <header className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Панель Администратора: {user.name}</h1>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Панель Администратора: {user.name}</h1>
         <div>
           <button onClick={toggleTheme} className="mr-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">Toggle Theme</button>
           <button onClick={onLogout} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Выйти</button>
@@ -50,27 +49,27 @@ const AdminDashboard = ({ user, onLogout, theme, toggleTheme }) => {
       </header>
       <div className="grid grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-          <h2 className="text-xl mb-4">Мониторинг операторов</h2>
+          <h2 className="text-xl mb-4 text-gray-800 dark:text-white">Мониторинг операторов</h2>
           <ul className="space-y-4">
             {operators.map((op) => (
               <li key={op.id} className="p-4 border rounded dark:border-gray-700">
-                <p>Имя: {op.name}</p>
-                <p>Статус: {op.status}</p>
-                <p>Обработано вызовов: {op.callsHandled}</p>
+                <p className="text-gray-800 dark:text-white">Имя: {op.name}</p>
+                <p className="text-gray-800 dark:text-white">Статус: {op.status}</p>
+                <p className="text-gray-800 dark:text-white">Обработано вызовов: {op.callsHandled}</p>
               </li>
             ))}
           </ul>
         </div>
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-          <h2 className="text-xl mb-4">Общая статистика</h2>
-          <p>Всего вызовов: {stats.totalCalls}</p>
-          <p>Ложные: {stats.falseCalls}</p>
-          <p>В очереди: {stats.inQueue}</p>
-          <p>В работе: {stats.inWork}</p>
+          <h2 className="text-xl mb-4 text-gray-800 dark:text-white">Общая статистика</h2>
+          <p className="text-gray-800 dark:text-white">Всего вызовов: {stats.totalCalls}</p>
+          <p className="text-gray-800 dark:text-white">Ложные: {stats.falseCalls}</p>
+          <p className="text-gray-800 dark:text-white">В очереди: {stats.inQueue}</p>
+          <p className="text-gray-800 dark:text-white">В работе: {stats.inWork}</p>
         </div>
       </div>
       <div className="mt-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-        <h2 className="text-xl mb-4">Формирование отчетов</h2>
+        <h2 className="text-xl mb-4 text-gray-800 dark:text-white">Формирование отчетов</h2>
         <select
           value={reportPeriod}
           onChange={(e) => setReportPeriod(e.target.value)}
@@ -87,13 +86,13 @@ const AdminDashboard = ({ user, onLogout, theme, toggleTheme }) => {
       </div>
       <div className="mt-6 grid grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-          <h2 className="text-xl mb-4">История действий</h2>
-          <ul className="space-y-2 overflow-y-auto h-40">
+          <h2 className="text-xl mb-4 text-gray-800 dark:text-white">История действий</h2>
+          <ul className="space-y-2 overflow-y-auto h-40 text-gray-800 dark:text-white">
             {logs.map((log, idx) => <li key={idx}>{log}</li>)}
           </ul>
         </div>
         <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-          <h2 className="text-xl mb-4">Завершить вызовы в работе</h2>
+          <h2 className="text-xl mb-4 text-gray-800 dark:text-white">Завершить вызовы в работе</h2>
           <button onClick={() => markCompleted(1)} className="bg-blue-500 text-white px-4 py-2 rounded">Завершить вызов 1</button>
         </div>
       </div>

@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-indigo-900 dark:from-gray-900 dark:to-gray-800">
-      <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl w-96">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl max-w-lg w-full">
         <h1 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">ПсАТС - Автоматическая телефонная станция</h1>
         <p className="text-sm mb-4 text-gray-600 dark:text-gray-300">Система для обработки вызовов о пожарах в Москве (подсистема Системы-101).</p>
         <form onSubmit={handleSubmit}>
