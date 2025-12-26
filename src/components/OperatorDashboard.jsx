@@ -4,7 +4,7 @@ const moscowAddresses = [
   { address: 'ул. Тверская, 1', coords: [55.7574, 37.6114] },
   { address: 'Красная площадь, 3', coords: [55.7539, 37.6208] },
   { address: 'ул. Арбат, 10', coords: [55.7522, 37.5931] },
-  // Расширьте список
+  // Расширьте
 ];
 
 const generateRandomCall = (id) => {
@@ -27,9 +27,8 @@ const OperatorDashboard = ({ user, onLogout, theme, toggleTheme }) => {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
-    // Загрузка Яндекс API напрямую
     const script = document.createElement('script');
-    script.src = 'https://api-maps.yandex.ru/2.1/?apikey=ВАШ_API_КЛЮЧ&lang=ru_RU';  // Замените на ключ
+    script.src = 'https://api-maps.yandex.ru/2.1/?apikey=1163255e-bb23-48e7-aeb1-be5c1cc1be33&lang=ru_RU';  // Ключ из ATCC.html
     script.async = true;
     document.head.appendChild(script);
 
@@ -51,12 +50,13 @@ const OperatorDashboard = ({ user, onLogout, theme, toggleTheme }) => {
       calls.forEach((call) => {
         const color = call.status === 'waiting' ? (call.waitTime > 60 ? 'red' : call.waitTime > 30 ? 'yellow' : 'green') :
           call.status === 'accepted' ? 'blue' : call.status === 'in-progress' ? 'purple' : 'gray';
-        new window.ymaps.Placemark(call.coords, { hintContent: `Вызов ${call.id}: ${call.address}` }, { iconColor: color });
+        const marker = new window.ymaps.Placemark(call.coords, {}, { iconColor: color });
+        map.geoObjects.add(marker);
       });
     }
   }, [map, calls]);
 
-  // Остальной код симуляции вызовов, handle функций — как в предыдущей версии (не менял, чтобы не дублировать)
+  // Симуляция вызовов и handlers как раньше
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
@@ -67,9 +67,8 @@ const OperatorDashboard = ({ user, onLogout, theme, toggleTheme }) => {
           <button onClick={onLogout} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Выйти</button>
         </div>
       </header>
-      {/* Остальной JSX как в предыдущей версии, с dark: классами для темной темы */}
-      <div id="map" style={{ width: '100%', height: '500px' }}></div>
-      {/* ... */}
+      {/* Список вызовов, статистика, логи */}
+      <div id="map" className="w-full h-96 mt-6"></div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import AdminDashboard from './components/AdminDashboard';
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [theme, setTheme] = useState('light');  // Темная/светлая тема
+  const [theme, setTheme] = useState('light');
 
   const handleLogin = (loggedUser) => setUser(loggedUser);
   const handleLogout = () => setUser(null);

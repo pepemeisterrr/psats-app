@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-// Симуляция операторов (для админа)
+// Симуляция операторов
 const operators = [
   { id: 'operator1', name: 'Оператор 1', status: 'ожидает', callsHandled: 5 },
   { id: 'operator2', name: 'Оператор 2', status: 'занят', callsHandled: 3 },
   { id: 'operator3', name: 'Оператор 3', status: 'ожидает', callsHandled: 7 },
 ];
 
-const AdminDashboard = ({ user, onLogout }) => {
+const AdminDashboard = ({ user, onLogout, theme, toggleTheme }) => {
   const [stats, setStats] = useState({ totalCalls: 0, falseCalls: 0, inQueue: 0, inWork: 0 });
   const [reportPeriod, setReportPeriod] = useState('today');
-  const [logs, setLogs] = useState([]); // Логи операторов
+  const [logs, setLogs] = useState([]);
 
   useEffect(() => {
-    // Симуляция обновления статистики
     const interval = setInterval(() => {
       setStats({
         totalCalls: Math.floor(Math.random() * 100),
@@ -37,23 +36,24 @@ const AdminDashboard = ({ user, onLogout }) => {
   };
 
   const markCompleted = (callId) => {
-    // Симуляция завершения
     alert(`Вызов ${callId} завершен`);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6 text-gray-800 dark:text-white">
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Панель Администратора: {user.name}</h1>
-        <button onClick={onLogout} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Выйти</button>
+        <div>
+          <button onClick={toggleTheme} className="mr-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">Toggle Theme</button>
+          <button onClick={onLogout} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Выйти</button>
+        </div>
       </header>
       <div className="grid grid-cols-2 gap-6">
-        {/* Мониторинг операторов */}
-        <div className="bg-white p-4 rounded-lg shadow">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
           <h2 className="text-xl mb-4">Мониторинг операторов</h2>
           <ul className="space-y-4">
             {operators.map((op) => (
-              <li key={op.id} className="p-4 border rounded">
+              <li key={op.id} className="p-4 border rounded dark:border-gray-700">
                 <p>Имя: {op.name}</p>
                 <p>Статус: {op.status}</p>
                 <p>Обработано вызовов: {op.callsHandled}</p>
@@ -61,8 +61,7 @@ const AdminDashboard = ({ user, onLogout }) => {
             ))}
           </ul>
         </div>
-        {/* Статистика */}
-        <div className="bg-white p-4 rounded-lg shadow">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
           <h2 className="text-xl mb-4">Общая статистика</h2>
           <p>Всего вызовов: {stats.totalCalls}</p>
           <p>Ложные: {stats.falseCalls}</p>
@@ -70,13 +69,12 @@ const AdminDashboard = ({ user, onLogout }) => {
           <p>В работе: {stats.inWork}</p>
         </div>
       </div>
-      {/* Отчеты */}
-      <div className="mt-6 bg-white p-4 rounded-lg shadow">
+      <div className="mt-6 bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
         <h2 className="text-xl mb-4">Формирование отчетов</h2>
         <select
           value={reportPeriod}
           onChange={(e) => setReportPeriod(e.target.value)}
-          className="p-2 border rounded mb-4"
+          className="p-2 border rounded mb-4 dark:bg-gray-700 dark:text-white"
         >
           <option value="today">Сегодня</option>
           <option value="yesterday">Вчера</option>
@@ -87,17 +85,15 @@ const AdminDashboard = ({ user, onLogout }) => {
           Сформировать и экспортировать
         </button>
       </div>
-      {/* Логи и завершение вызовов */}
       <div className="mt-6 grid grid-cols-2 gap-6">
-        <div className="bg-white p-4 rounded-lg shadow">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
           <h2 className="text-xl mb-4">История действий</h2>
           <ul className="space-y-2 overflow-y-auto h-40">
             {logs.map((log, idx) => <li key={idx}>{log}</li>)}
           </ul>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
           <h2 className="text-xl mb-4">Завершить вызовы в работе</h2>
-          {/* Симуляция списка вызовов в работе */}
           <button onClick={() => markCompleted(1)} className="bg-blue-500 text-white px-4 py-2 rounded">Завершить вызов 1</button>
         </div>
       </div>
